@@ -1,0 +1,239 @@
+IREQ-Francais.dico -- Un dictionnaire français pour ispell 3.1
+
+  Copyright (c) 1993, 1994, 1995 Martin Boyer et Hydro-Québec.
+
+    Ce programme est un logiciel libre: vous pouvez le redistribuer
+    et/ou le modifier selon les termes du "GNU General Public
+    License", tel que publié par le "Free Software Foundation"; soit
+    la version 2 de cette licence ou (à votre choix) toute version
+    ultérieure.
+
+    Ce programme est distribué dans l'espoir qu'il sera utile, mais
+    SANS AUCUNE GARANTIE; sans même la garantie implicite de valeur
+    commerciale ou d'aptitude à satisfaire un but donné.  Se référer
+    au "GNU General Public License" pour plus de détails.
+
+    Vous devriez avoir reçu une copie du "GNU General Public License"
+    en même temps que ce programme; sinon, écrivez à "Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA".
+
+
+1. INTRODUCTION
+---------------
+
+Cet ensemble de fichiers constitue une liste de mots français et, de
+concert avec les logiciels buildict et ispell (versions 3.1.04 et
+ultérieures), forme la base d'un correcteur d'orthographe.  La version
+courante (1.4) contient 24419 mots simples et 23199 mots "affixés",
+représentant un total de 221376 mots ou variations de mots.
+
+Pour faciliter la correction du dictionnaire, les mots sont groupés
+selon leur type (noms communs et adjectifs, noms propres, verbes du
+premier groupe, verbes du deuxième groupe, etc.).  Le fichier MANIFEST
+identifie chaque fichier de cette liste.  Tous et seulement les
+fichiers contenant des mots français se terminent par l'extension
+".dico".  Les fichiers contenant des mots anglais se terminent par
+l'extension ".dict".
+
+Un fichier spécial, "francais.aff", décrit les règles de modification
+des racines qui permettent de créer plusieurs mots à partir de
+variations sur une même racine.  Ce fichier décrit aussi les
+caractères acceptés par le correcteur d'orthographe et leurs
+équivalents en syntaxe TeX.
+
+Le site d'archive principal est:
+
+       Site: ftp.robot.ireq.ca
+       Répertoire: /pub/ispell
+       Fichier: francais-IREQ-1.4.tar.gz
+
+Il y a aussi un site miroir à:
+
+       Site: ftp.ibp.fr
+       Répertoire: /pub/ispell/francais
+       Fichier: francais-IREQ-1.4.tar.gz
+
+
+2. INSTALLATION
+----------------
+
+Pour utiliser ce dictionnaire, vous devez d'abord installer ispell
+3.1.04 ou une version plus récente.  Au moment de l'écriture de ces
+lignes, la version 3.1.13 est la version courante.  Ce logiciel est
+disponible par ftp:
+
+       Site : ftp.cs.ucla.edu
+       Répertoire : pub/ispell-3.1
+       Fichier : ispell-3.1.xx.tar.gz ("xx" est le numéro de version)
+
+Je peux malheureusement pas répondre aux demandes d'aide relatives à
+ispell.  Vous pouvez contacter l'auteur, Geoff Kuenning
+<ispell-bugs@itcorp.com> ou <geoff@ITcorp.com>, ou encore poster un
+message à l'un des groupes suivants: gnu.emacs.help, comp.emacs ou
+comp.text.tex.
+
+Si vous désirez MODIFIER la liste de mots dans le dictionnaire
+francais-IREQ, vous devez vous procurer le programme buildict,
+disponible à l'adresse suivante:
+
+       Site: ftp.robot.ireq.ca
+       Répertoire: /pub/ispell
+       Fichier: buildict.tar.gz
+
+Buildict remplace le "shell script" munchlist fourni avec la
+distribution standard de ispell.  Il peut être utilisé avantageusement
+avec les dictionnaires anglais qui font partie de la distribution de
+ispell et DOIT être utilisé pour construire de nouveaux dictionnaires
+basés sur la description de langage contenue dans francais.aff.
+Buildict N'EST PAS REQUIS POUR L'UTILISATION NORMALE du dictionnaire
+francais-IREQ; un dictionnaire pré-compilé, francais.dico, est
+disponible.  La reconstruction de francais.dico peut demander
+plusieurs heures et environ une centaine de mégabytes d'espace disque
+temporaire.
+
+À partir du dictionnaire francais.dico, tel que distribué ou construit
+avec buildict, il est nécessaire de créer une table de hachage pour
+accès rapide.  Le programme buildhash, qui fait partie de la
+distribution standard de ispell, est utilisé à cette fin:
+
+% buildhash francais.dico ./francais.aff francais.hash
+
+Avec la version 3.1 de ispell, cette opération est automatisée si on
+installe les fichiers de la distribution francais-IREQ dans le
+répertoire .../languages/francais-IREQ et que la ligne suivante est
+insérée dans le fichier local.h de la distribution ispell (sur une
+seule ligne):
+
+#define LANGUAGES "{english,MASTERDICTS=english.med+,\
+		    HASHFILES=med+.hash,VARIANTS=american,\
+		    EXTRADICT=/usr/dict/words} \
+		   {francais-IREQ}"
+
+Voir la documentation de ispell pour plus de détails.
+
+L'installation est simple et consiste à déplacer le fichier
+francais.hash et à copier le fichier francais.aff dans le répertoire
+désigné à cette fin (LIBDIR, dans le Makefile de ispell).  Il faut
+aussi éditer le fichier Makefile de francais-IREQ; la définition de
+LIBDIR dans ispell n'est pas propagée dans francais-IREQ.
+
+Si les lignes ci-haut sont présentes dans local.h, l'installation se
+fait automatiquement avec la commande "make install" dans le
+répertoire ispell.
+
+Il est aussi possible de compiler et d'installer le dictionnaire
+francais-IREQ indépendamment de ispell en faisant "make" et "make
+install" dans le répertoire .../languages/francais-IREQ.
+
+
+3. UTILISATION
+--------------
+
+Il est essentiel, pour chaque utilisateur, de créer le fichier
+.ispell_francais dans son répertoire d'attache ($HOME).  Ainsi, les
+ajouts personnels au dictionnaire principal seront distincts de ceux
+du dictionnaire anglais.
+
+Un rappel sur la façon de choisir la version française de ispell, une
+fois l'installation terminée:
+
+% ispell -d francais fichier.texte	    (pour l'encodage ISO 8859/1)
+% ispell -d francais fichier.tex	    (pour l'encodage TeX)
+% ispell -d francais -T list -t fichier.tex (fichier TeX, encodage 8859/1)
+
+
+À l'utilisation, vous remarquerez que les élisions (apostrophes)
+causent des problèmes.  J'ai choisi de faire de l'apostrophe une
+partie possible d'un mot; ceci permet d'admettre, par exemple, le mot
+"aujourd'hui" mais de rejeter "l'handicap", ou d'accepter "l'enfant"
+en rejetant "l'enfants".  Idéalement, ispell devrait être modifié pour
+permettre l'utilisation de règles de modifications entièrement
+automatiques et une table des combinaisons légales des règles.  Il
+serait ainsi possible d'admettre automatiquement l'utilisation de "l'"
+devant une voyelle, mais pas devant une consonne et seulement devant
+un mot singulier.  Pour l'instant, malheureusement, il faut ajouter
+toutes les élisions possibles au dictionnaire.
+
+Emacs (à partir de la version 19.23) et XEmacs supportent les versions
+récentes de ispell.  Les seuls changements à apporter sont l'ajout du
+dictionnaire francais-IREQ et de ses caractéristiques dans la liste
+des dictionnaires supportés.  Pour utiliser francais-IREQ avec Emacs
+et TeX (avec l'encodage TeX), il faut créer deux liens symboliques: le
+premier, du fichier francais-TeX.hash vers le fichier francais.hash,
+dans le répertoire de dictionnaires de ispell, et le second, de
+.ispell_francais-TeX vers .ispell_francais dans le répertoire
+d'attache de chaque utilisateur.  Ceci parce que le nom du
+dictionnaire détermine l'encodage utilisé par ispell.  Le contenu du
+dictionnaire est indépendant de l'encodage utilisé.
+
+Une fois cette installation terminée, Il suffit d'appeler la commande
+emacs "ispell-change-dictionary" avec l'argument "francais-TeX" pour
+utiliser ispell avec l'encodage TeX.  Pour les fichiers qui utilisent
+l'encodage ISO 8859/1 (parfois appelé ISO latin1), il suffit de
+choisir le dictionnaire "francais", puisque ISO 8859/1 est l'encodage
+naturel de francais-IREQ.
+
+Voici ce que j'utilise comme définition du dictionnaire francais-IREQ
+dans emacs:
+
+    ("francais"                         ; francais.aff
+     "[A-Za-zÀÂÇ-ËÎÏÔÙÛÜàâç-ëîïôùûü]" "[^A-Za-zÀÂÇ-ËÎÏÔÙÛÜàâç-ëîïôùûü]"
+     "[-']" t nil)
+    ("francais-TeX"                     ; francais.aff
+     "[A-Za-zÀÂÇ-ËÎÏÔÙÛÜàâç-ëîïôùûü\\]" "[^A-Za-zÀÂÇ-ËÎÏÔÙÛÜàâç-ëîïôùûü\\]"
+     "[-'^`\"]" t nil "~tex")
+
+L'ajout de dictionnaires pour utilisation de ispell avec emacs est à
+mon avis un imbroglio, mais ce n'est pas mon problème.  Le fichier
+ispell-ireq.el (inclus dans la distribution de francais-IREQ)
+fonctionne bien ici.  Il suffit de faire (require 'ispell-ireq).  À
+vos risques...
+
+
+
+4. NOTES
+--------
+
+Si vous utilisez gcc avec SunOS 4.1.3 pour compiler ispell, les
+versions antérieures à 2.5.8 optimisent incorrectement la fonction
+upcase(), dans le fichier makedent.c.  Il faut alors compiler ce
+fichier (ou ispell au complet) sans optimisation.
+
+Il faut s'assurer que ispell n'est pas compilé avec l'option NO8BIT
+(voir config.X).
+
+Évidemment, je suis intéressé par toute erreur ou ajout utile au
+dictionnaire, seulement si les modifications proposées sont vérifiées
+au préalable dans un (véritable) dictionnaire.  Vous pouvez
+communiquer avec moi à l'adresse ci-dessous; je répondrai dans la
+mesure de mes moyens (c'est-à-dire selon le temps dont je dispose
+après le travail).
+
+Il existe aussi un autre dictionnaire français pour ispell:
+
+       Site : ftp.inria.fr
+       Répertoire : gnu
+       Fichier : ispell-french.tar.Z
+
+
+Many thanks to Geoff Kuenning for ispell and his interest to support
+other languages.
+
+Merci aux nombreuses personnes qui m'ont fait parvenir des corrections
+au dictionnaire: Martin Beaudoin, Michel Pelletier, Régis Houde et
+d'autres chercheurs de l'IREQ, de même que Pham Dinh Tuan, Robert
+Germic, Tom De Pauw et Frédéric Devernay.  Merci aussi à tous ceux qui
+m'ont encouragé à poursuivre ce travail.
+
+Martin Boyer
+Longueuil
+25 novembre 1996
+
+
+Envoyez vos commentaires, relevés de bogues et corrections à:
+
+
+  Martin Boyer                         http://www.robot.ireq.ca/Martin.Boyer/
+  Division Robotique                                     mboyer@robot.ireq.ca
+  Institut de recherche d'Hydro-Québec             Téléphone: +1 514 652-8412
+  Varennes, QC, Canada                                   Fax: +1 514 652-1316

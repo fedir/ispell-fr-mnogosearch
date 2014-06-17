@@ -1,0 +1,22 @@
+ Fichier		Description
+-----------------------------------------------
+ MANIFEST		ce fichier
+ LISEZMOI		description du produit
+ README			description sommaire en anglais
+ COPYING		"GNU GENERAL PUBLIC LICENSE"
+ ChangeLog		Historique des changements
+ Makefile		compilation et installation
+ Acronymes.dico         acronymes valides uniquement en français
+ Acronyms.dict		acronymes valides en anglais et en français
+ Communs.dico		noms communs, etc., excluant les verbes des 2 premiers groupes
+ Communs-V.dico		même que Communs.dico, mais tous les mots sont vérifiés
+ francais.dico		dictionnaire pré-compilé à partir de tous les fichiers .dico et .dict
+ francais.aff           définition des drapeaux et extensions
+ ispell-ireq.el		support du dictionnaire francais-IREQ dans emacs
+ Propres.dico           noms propres valides uniquement en français
+ Universal.dict         noms propres anglais valides dans toutes les langues
+ Universel.dico         noms propres français valides dans toutes les langues
+ Verbes-1-NV.dico       1er groupe, non vérifiés
+ Verbes-1-VI.dico       1er groupe, vérifiés mais incomplets
+ Verbes-1.dico          1er groupe, vérifiés avec tous les drapeaux connus
+ Verbes-2.dico          2ème groupe, vérifiés avec tous les drapeaux connus

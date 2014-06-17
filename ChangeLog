@@ -1,0 +1,14 @@
+Mon Apr 25 08:28:39 1994  Martin Boyer  (mboyer@ireq-robot)
+
+	* Version 1.2.
+
+	* LISEZMOI, ispell.el.patch: TeX-francais remplacé par
+	  francais-TeX.
+
+Sun Apr 24 14:25:46 1994  Martin Boyer  (mboyer@ireq-robot)
+
+	* Sortie de la version 1.1.  Les dictionnaires n'ont pas changé;
+	  seulement les fichiers de support et la documentation.
+
+	* LISEZMOI, Makefile, README, etc.: mise à jour pour la version
+	  3.1.04 de ispell.
